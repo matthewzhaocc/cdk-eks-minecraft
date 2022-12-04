@@ -41,6 +41,7 @@ export class ClusterStack extends TerraformStack {
         endpointPrivateAccess: true,
         endpointPublicAccess: true,
       },
+      enabledClusterLogTypes: ["api", "audit", "authenticator"],
     });
 
     const eksAmiVersion = new dataAwsSsmParameter.DataAwsSsmParameter(

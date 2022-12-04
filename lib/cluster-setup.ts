@@ -115,5 +115,17 @@ export class ClusterSetupStack extends TerraformStack {
 
       chart: "aws-load-balancer-controller",
     });
+
+    new Release(this, "minecraftzzzz", {
+      repository: "https://itzg.github.io/minecraft-server-charts/",
+      name: "minecraft",
+      set: [
+        { name: "minecraftServer.eula", value: "true" },
+        { name: "persistence.dataDir.enabled", value: "true" },
+      ],
+      namespace: "minecraft",
+      createNamespace: true,
+      chart: "minecraft",
+    });
   }
 }
