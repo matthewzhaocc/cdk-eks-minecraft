@@ -42,6 +42,15 @@ export class ClusterStack extends TerraformStack {
         endpointPublicAccess: true,
       },
       enabledClusterLogTypes: ["api", "audit", "authenticator"],
+      provisioners: [
+        {
+          type: "local-exec",
+          command: `aws eks update-kubeconfig --region ${
+            process.env.AWS_REGION || "us-west-1"
+          } --name ${cfg.clusterName}`,
+          when: "create",
+        },
+      ],
     });
 
     const eksAmiVersion = new dataAwsSsmParameter.DataAwsSsmParameter(
